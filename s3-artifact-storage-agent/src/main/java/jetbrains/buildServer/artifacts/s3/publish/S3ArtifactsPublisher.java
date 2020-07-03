@@ -71,7 +71,7 @@ public class S3ArtifactsPublisher implements ArtifactsPublisher {
 
     if (!filteredMap.isEmpty()) {
       final AgentRunningBuild build = myTracker.getCurrentBuild();
-      final String pathPrefix = getPathPrefix(build);
+      final String pathPrefix = "";
       final S3FileUploader fileUploader = getFileUploader(build);
       myArtifacts.addAll(fileUploader.publishFiles(build, pathPrefix, filteredMap));
       publishArtifactsList(build);
@@ -93,7 +93,7 @@ public class S3ArtifactsPublisher implements ArtifactsPublisher {
 
   private void publishArtifactsList(@NotNull final AgentRunningBuild build) {
     if (!myArtifacts.isEmpty()) {
-      final String pathPrefix = getPathPrefix(build);
+      final String pathPrefix = "";
       try {
         myHelper.publishArtifactList(myArtifacts, CollectionsUtil.asMap(S3_PATH_PREFIX_ATTR, pathPrefix));
       } catch (IOException e) {

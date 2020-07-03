@@ -90,7 +90,7 @@ public class S3RegularFileUploader implements S3FileUploader {
               return null;
             }
             final String artifactPath = S3Util.normalizeArtifactPath(path, file);
-            final String objectKey = pathPrefix + artifactPath;
+            final String objectKey = artifactPath;
 
             artifacts.add(ArtifactDataInstance.create(artifactPath, file.length()));
 

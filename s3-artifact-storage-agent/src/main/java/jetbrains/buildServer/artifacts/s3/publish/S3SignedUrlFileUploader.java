@@ -109,7 +109,7 @@ public class S3SignedUrlFileUploader implements S3FileUploader {
     for (Map.Entry<File, String> entry : filesToPublish.entrySet()) {
       final String normalizeArtifactPath = S3Util.normalizeArtifactPath(entry.getValue(), entry.getKey());
       fileToNormalizedArtifactPathMap.put(entry.getKey(), normalizeArtifactPath);
-      fileToS3ObjectKeyMap.put(entry.getKey(), pathPrefix + normalizeArtifactPath);
+      fileToS3ObjectKeyMap.put(entry.getKey(), normalizeArtifactPath);
     }
 
     final ConcurrentLinkedQueue<ArtifactDataInstance> artifacts = new ConcurrentLinkedQueue<>();
