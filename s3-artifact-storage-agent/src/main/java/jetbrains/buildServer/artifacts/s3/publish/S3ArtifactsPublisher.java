@@ -110,7 +110,7 @@ public class S3ArtifactsPublisher implements ArtifactsPublisher {
     if (!StringUtil.isEmptyOrSpaces(prefix)) {
       pathSegments.add(prefix);
     }
-    pathSegments.add(build.getSharedConfigParameters().get(ServerProvidedProperties.TEAMCITY_PROJECT_ID_PARAM));
+ //   pathSegments.add(build.getSharedConfigParameters().get(ServerProvidedProperties.TEAMCITY_PROJECT_ID_PARAM));
  //   pathSegments.add(build.getBuildTypeExternalId());
  //   pathSegments.add(Long.toString(build.getBuildId()));
     return StringUtil.join("/", pathSegments) + "/";
