@@ -71,10 +71,8 @@ public class S3ArtifactsPublisher implements ArtifactsPublisher {
 
     if (!filteredMap.isEmpty()) {
       final AgentRunningBuild build = myTracker.getCurrentBuild();
-      build.getBuildLogger().warning("build" + build);
-      final String pathPrefix = "";
+      final String pathPrefix = getPathPrefix(build);
       final S3FileUploader fileUploader = getFileUploader(build);
-      
       myArtifacts.addAll(fileUploader.publishFiles(build, pathPrefix, filteredMap));
       publishArtifactsList(build);
     }
@@ -95,7 +93,7 @@ public class S3ArtifactsPublisher implements ArtifactsPublisher {
 
   private void publishArtifactsList(@NotNull final AgentRunningBuild build) {
     if (!myArtifacts.isEmpty()) {
-      final String pathPrefix = "";
+      final String pathPrefix = getPathPrefix(build);
       try {
         myHelper.publishArtifactList(myArtifacts, CollectionsUtil.asMap(S3_PATH_PREFIX_ATTR, pathPrefix));
       } catch (IOException e) {
@@ -113,8 +111,8 @@ public class S3ArtifactsPublisher implements ArtifactsPublisher {
       pathSegments.add(prefix);
     }
     pathSegments.add(build.getSharedConfigParameters().get(ServerProvidedProperties.TEAMCITY_PROJECT_ID_PARAM));
-    pathSegments.add(build.getBuildTypeExternalId());
-    pathSegments.add(Long.toString(build.getBuildId()));
+ //   pathSegments.add(build.getBuildTypeExternalId());
+ //   pathSegments.add(Long.toString(build.getBuildId()));
     return StringUtil.join("/", pathSegments) + "/";
   }
 
