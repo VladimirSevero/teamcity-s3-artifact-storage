@@ -58,7 +58,6 @@ public class S3RegularFileUploader implements S3FileUploader {
                                                        @NotNull final String pathPrefix,
                                                        @NotNull final Map<File, String> filesToPublish) {
     final String homeDir = myBuildAgentConfiguration.getAgentHomeDirectory().getPath();
-    build.getBuildLogger().warning("HomeDir " + homeDir);
     final String certDirectory = TrustedCertificatesDirectory.getAllCertificatesDirectoryFromHome(homeDir);
     final int numberOfRetries = S3Util.getNumberOfRetries(build.getSharedConfigParameters());
     final int retryDelay = S3Util.getRetryDelayInMs(build.getSharedConfigParameters());
@@ -91,8 +90,7 @@ public class S3RegularFileUploader implements S3FileUploader {
               return null;
             }
             final String artifactPath = S3Util.normalizeArtifactPath(path, file);
-            build.getBuildLogger().warning("ArtifactPath " + artifactPath );
-            final String objectKey = "";
+            final String objectKey = pathPrefix + artifactPath;
 
             artifacts.add(ArtifactDataInstance.create(artifactPath, file.length()));
 
